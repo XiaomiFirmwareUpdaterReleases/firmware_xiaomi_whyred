@@ -1,0 +1,12 @@
+version: 2
+jobs:
+  build:
+    machine: true
+    steps:
+      - sudo apt-get -qq update && sudo apt-get -qq install wput sshpass
+      - run: git clone https://github.com/XiaomiFirmwareUpdater/firmware_xiaomi_whyred.git -b weekly $HOME/XFU/
+      - run: cd $HOME/XFU/
+      - run: wget -q https://github.com/XiaomiFirmwareUpdater/mi-firmware-updater/raw/weekly/script.sh
+      - run: wget -q https://github.com/XiaomiFirmwareUpdater/Scripts/raw/master/getversion.sh
+      - run: chmod 775 *.sh
+      - run: ./device.sh
